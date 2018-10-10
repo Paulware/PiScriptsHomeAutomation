@@ -18,6 +18,8 @@ as a home automation server
   password.  Do not use @gmail.com in the username, and do not use any " quotation
   marks in the name or password.
   
+  If you have any comments, you can contact me at: paulware@hotmail.com
+  
   
   
   
