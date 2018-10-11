@@ -71,16 +71,6 @@ rsn_pairwise=CCMP
 
 EOF
 
-#cat > /etc/hostapd/hostapd.conf <<EOF
-#interface=wlan0
-#ssid=vehicle1
-#hw_mode=g
-#channel=7
-#auth_algs=1
-#wmm_enabled=0
-#
-#EOF
-
 sed -i -- 's/#DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 
