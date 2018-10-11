@@ -8,16 +8,25 @@ as a home automation server
   
   Bootup the raspberry pi and open a line terminal and execute these commands:
   
+  <pre>
   sudo bash
   cd /boot
   chmod 777 all.sh
   ./all.sh gmailUsername gmailPassword
+  </pre>
   
   Where gmailUsername is your gmail user name, and gmailPassword is your gmail
   password.  Do not use @gmail.com in the username, and do not use any " quotation
   marks in the name or password.
   
-  
+<p>
+Note: If you prefer an open network for sensors to login to, run: 
+<pre>
+./openAp.sh
+</pre>
+
+After ./all.sh was run.<br>
+email:paulware@hotmail.com  
   
   
   
