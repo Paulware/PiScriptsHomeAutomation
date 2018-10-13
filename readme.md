@@ -21,17 +21,20 @@ as a home automation server. <i>Configuration instructions:</i>
   </li>
   </ul>
 <p>
-Note: If you prefer an open network for sensors to login to, run: 
+Note: If you prefer an open network for sensors, run: 
 <pre>
 ./openAp.sh
 </pre>
 
-After ./all.sh was run.<br>
+After ./all.sh was run.  This will create a "vehicle1" ssid with no password.<br>
 <p>
 <h2>Description of .sh files</h2>
-<ul>
-<li>file 1: blah blah blah</li>
-</ul>
+<table border ="2px solid">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>all.sh</td>Run all the .sh files.  Check that user is super user and parameter contains gmail info</td></tr>
+<tr><td>ap.sh</td>Create an acccess point with SSID="vehicle1" and password="ABCD1234"</td></tr>
+</table>  
+
 email:paulware@hotmail.com  
   
   
