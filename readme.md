@@ -29,10 +29,10 @@ Note: If you prefer an open network for sensors, run:
 After ./all.sh was run.  This will create a "vehicle1" ssid with no password.<br>
 <p>
 <h2>Description of .sh files</h2>
-<table border ="2px solid">
+<table border="2">
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>all.sh</td>Run all the .sh files.  Check that user is super user and parameter contains gmail info</td></tr>
-<tr><td>ap.sh</td>Create an acccess point with SSID="vehicle1" and password="ABCD1234"</td></tr>
+<tr><td>all.sh</td><td>Run all the .sh files.  Check that user is super user and parameter contains gmail info</td></tr>
+<tr><td>ap.sh</td><td>Create an acccess point with SSID="vehicle1" and password="ABCD1234"</td></tr>
 </table>  
 
 email:paulware@hotmail.com  
