@@ -7,5 +7,6 @@ echo "Adding * * * * * /usr/bin/python /var/www/html/Paulware/broadcastAddress.p
 echo "MAILTO=\"\"" > mycron
 echo "* * * * * /usr/bin/python /var/www/html/Paulware/broadcastAddress.py" >> mycron
 echo "* * * * * cd /var/www/html/Paulware;php timer.php" >> mycron
+echo "0 3 * * * /sbin/shutdown -r + 5" >> mycron
 crontab mycron
 rm mycron

@@ -41,6 +41,7 @@ After ./all.sh was run.  This will create a "vehicle1" ssid with no password.<br
 <tr><td>mysql.sh</td><td>Install mysql</td></tr>
 <tr><td>openAp.sh</td><td>Change the network to an open network (no password).  <i>This is not required</i></td></tr>
 <tr><td>sendMail.sh</td><td>Add the ability of the pi to send an email.  A current gmail username and password is required</td></tr>
+<tr><td>ssd.sh</td><td>Optional setup of ssd drive.</td></tr>
 <tr><td>ssh.sh</td><td>Setup the pi for ssh access</td></tr>
 <tr><td>timezone.sh</td><td>Set the pi's current timezone to match the user's locations</td></tr>
 </table>  
