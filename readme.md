@@ -1,12 +1,12 @@
 # PiScriptsHomeAutomation
 These scripts are used to configure a Raspberry Pi 
-as a home automation server. <i>Configuration instructions:</i>
+as a home automation server. <br><h2><i>Configuration instructions:</i></h2>
 
   <ul>
-  <li>Place the latest raspbian image from <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a></li>
-  <li>Next place .img on a 8gb or larger sd card (I use win32diskimager for this)</li>
-  <li>Place all the files here to the sd card (this is considered the /boot directory on the pi).  Any windows machine can be used for this as the sd card has a small amount of space which is windows compatible.</li>
-  <li>Bootup the raspberry pi,  open a line terminal and execute these commands:
+  <li>Obtain the latest raspbian image from <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a></li>
+  <li>Place the raspbian .img file on a 8gb (or larger) sd card (I use win32diskimager for this)</li>
+  <li>Place all the files and directory from this repository on the sd card (this will be considered the /boot directory on the pi).  Any windows machine can be used for this as the sd card has a small amount of space which is windows compatible.</li>
+  <li>Bootup the raspberry pi, open a line terminal and execute these commands:
   
   <pre>
   sudo bash
@@ -20,13 +20,6 @@ as a home automation server. <i>Configuration instructions:</i>
   marks in the name or password.
   </li>
   </ul>
-<p>
-Note: If you prefer an open network for sensors, run: 
-<pre>
-./openAp.sh
-</pre>
-
-After ./all.sh was run.  This will create a "vehicle1" ssid with no password.<br>
 <p>
 <h2>Description of .sh files</h2>
 <table border="2px">
