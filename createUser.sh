@@ -1,5 +1,3 @@
-#!/bin/bash
-
 mysql -u root -ppi <<QUERY0
 CREATE DATABASE Paulware /*\!40100 DEFAULT CHARACTER SET utf8 */;
 QUERY0

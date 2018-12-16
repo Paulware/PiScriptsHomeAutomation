@@ -102,13 +102,14 @@ if ($s) {
        $ID               = $row['ID'];
        $TriggerValue     = $row['TriggerValue'];
        $TimeValue        = $row['TimeValue'];
+       $IButtonValue     = $row['IButtonValue'];
        $FrequencySeconds = $row['FrequencySeconds'];
        $LastEvent        = $row['LastEvent'];
        $AffectedMAC      = $row['AffectedMAC'];
        $AffectedAddress  = MACtoIp($AffectedMAC);
-       echo "<p>Found an Action: $Action with Event: $Event and Message: $Message, Phone: $Phone, Provider: $Provider, for Sensor: $Sensor<br>\n";
+       echo "<p>Found an Action: $Action with Event: $Event and Message: $Message, Phone: $Phone, Provider: $Provider, IButtonValue: $IButtonValue for Sensor: $Sensor<br>\n";
 
-       $isTriggered = getIsTriggered ($Event, $temperature, $TriggerValue, $humidity, $value, $currentValue );
+       $isTriggered = getIsTriggered ($Event, $temperature, $TriggerValue, $humidity, $value, $currentValue, $TimeValue, $IButtonValue );
                 
        if ($isTriggered) {        
           // Get difference in time between now and LastEvent 

@@ -1,4 +1,3 @@
-#!/bin/bash
 # Note: run this with the command: sudo ./all.sh
 if [[ "$EUID" -ne 0 ]]
 then
@@ -26,7 +25,7 @@ apt-get update -y
 ./crontab.sh
 ./mysql.sh
 ./apache2Php7.sh
-./ap.sh
+#./ap.sh
 ./createUser.sh
 ./createTables.sh
 ./sendMail.sh $USERNAME $PASSWORD

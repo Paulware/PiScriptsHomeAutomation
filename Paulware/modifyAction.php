@@ -25,6 +25,7 @@
   $FrequencySeconds = '0';
   $JabberRecipient = '';
   $JabberMessage = '';
+  $IButtonValue = '';
   if ($ID > 0) {
     $sql = "Select * From actions where ID=$ID";
     $result = query ($sql);
@@ -43,6 +44,7 @@
       $TimeValue        = $row["TimeValue"];
       $TriggerValue     = $row["TriggerValue"];
       $FrequencySeconds = $row["FrequencySeconds"];
+      $IButtonValue     = $row["IButtonValue"];
       $JabberRecipient = $Phone;
       $JabberMessage   = $Body;
     }
@@ -61,7 +63,7 @@
              '&Body=' + Body + '&AffectedMAC=' + AffectedMAC + '&TriggerValue=' + 
              TriggerValue + '&PhotoUsername=' + PhotoUsername + '&PhotoSubject=' + 
              PhotoSubject + '&PhotoDevice=' + PhotoDevice + '&TimeValue='+TimeValue +
-             '&FrequencySeconds=' + FrequencySeconds;
+             '&FrequencySeconds=' + FrequencySeconds + '&IButtonValue='+IButtonValue;
        window.location.href=url;
    }
 
@@ -88,6 +90,7 @@ echoOption ("value=\"water\" ",$Event == 'water',">Water Detected");
 echoOption ("value=\"time\" ",$Event == 'time',">Time is");
 echoOption ("value=\"sensorLo\" ",$Event == 'sensorLo',">Sensor Low");
 echoOption ("value=\"sensorHi\" ",$Event == 'sensorHi',">Sensor High");
+echoOption ("value=\"iButton\" ",$Event == 'iButton',">iButton detected");
 echoOption ("value=\"transitionLo\" ",$Event == 'transitionLo',">Transitions to Low");
 echoOption ("value=\"gpio00TransitionLo\" ",$Event == 'gpio00TransitionLo',">Gpio pin 0 Transitions to Low");
 echoOption ("value=\"gpio01TransitionLo\" ",$Event == 'gpio01TransitionLo',">Gpio pin 1 Transitions to Low");
@@ -112,16 +115,24 @@ echoOption ("value=\"gpio08TransitionHi\" ",$Event == 'gpio08TransitionHi',">Gpi
 echoOption ("value=\"gpio09TransitionHi\" ",$Event == 'gpio09TransitionHi',">Gpio pin 9 Transitions to High");
 echo ( "</Select>\n");
 
+// echo (" Note Event: [$Event]<br>\n" );
 if ($Event == 'time') {
   echo ("<div id=\"divTime\"> HH:MM<input name=\"TimeValue\" value=\"$TimeValue\"></div>\n");
 } else {
   echo ("<div id=\"divTime\" style=\"display:none;\"> HH:MM<input name=\"TimeValue\" value=\"$TimeValue\"></div>\n"); 
+}
+if ($Event == 'iButton') {
+  echo ("<div id=\"divIButton\">with hex address: XX:XX:XX:XX:XX:XX:XX:XX<input name=\"iButton\" value=\"$IButtonValue\"></div>\n");
+} else {
+  echo ("<div id=\"divIButton\" style=\"display:none;\">with hex address XX:XX:XX:XX:XX:XX:XX:XX<input name=\"iButton\" value=\"$IButtonValue\"></div>\n"); 
 }
 echo ("<div id=\"divTrigger\" style=\"display:none;\">Trigger Value: <input name=\"TriggerValue\" value=\"$TriggerValue\"></div>\n");
 echo ("<Select name=\"Action\" onchange=\"changeSelection();\">\n");
 echoOption ("value=\"email\" ",$Action == "email", ">Send an Email");
 echoOption ("value=\"text\" ", $Action == "text",  ">Send a text");
 echoOption ("value=\"IM\" ",   $Action == "IM",    ">Send an IM");
+echoOption ("value=\"gpio06HI\" ", $Action == "gpio06HI",   ">Turn Sonoff On" );
+echoOption ("value=\"gpio06LO\" ", $Action == "gpio06LO",   ">Turn Sonoff Off" );
 echoOption ("value=\"gpio00HI\" ", $Action == "gpio00HI",   ">Set gpio0 of a device HIGH" );
 echoOption ("value=\"gpio01HI\" ", $Action == "gpio01HI",   ">Set gpio1 of a device HIGH" );
 echoOption ("value=\"gpio02HI\" ", $Action == "gpio02HI",   ">Set gpio2 of a device HIGH" );
@@ -205,6 +216,7 @@ echo ("\n   var ID = $ID;\n");
   var PhotoDevice;
   var JabberMessage;
   var JabberRecipint;
+  var IButtonValue;
 
   function getVariables() {
      Action           = document.all.Action.value;   
@@ -221,6 +233,7 @@ echo ("\n   var ID = $ID;\n");
      FrequencySeconds = document.all.FrequencySeconds.value;
      JabberMessage    = document.all.JabberMessage.value;
      JabberRecipient  = document.all.JabberRecipient.value;
+     IButtonValue     = document.all.iButton.value
      if (Action=="photo") {
         Username = document.all.PhotoUsername.value;
         Subject = document.all.PhotoSubject.value;
@@ -235,8 +248,8 @@ echo ("\n   var ID = $ID;\n");
   function testAction () {
      getVariables();
      window.location.href = 'testAction.php?Sensor=' + Sensor + '&Action=' + Action + '&Event=' + Event + 
-             '&Phone=' + Phone + '&Username=' + Username + '&Message=' + Message + '&Subject=' + Subject + '&Body=' + 
-             Body + '&Provider=' + Provider + '&AffectedMAC=' + AffectedMAC + '&TriggerValue=' + TriggerValue;             
+       '&Phone=' + Phone + '&Username=' + Username + '&Message=' + Message + '&Subject=' + Subject + '&Body=' + 
+       Body + '&Provider=' + Provider + '&AffectedMAC=' + AffectedMAC + '&TriggerValue=' + TriggerValue;             
   }
 
   function showTemp() {
@@ -256,9 +269,12 @@ echo ("\n   var ID = $ID;\n");
   function changeEvent() {   
      showTemp();
      document.all.divTime.style.display = 'none';
+     document.all.divIButton.style.display = 'none';
 	    value = document.all.Event.value;
      if (value=='time') {
         document.all.divTime.style.display='block';     
+     } else if (value == 'iButton' ) {
+        document.all.divIButton.style.display = 'block';
      }       
   }
   
@@ -297,21 +313,6 @@ echo ("\n   var ID = $ID;\n");
 <hr>How often would like the action to take place?<br>
 <?php
   echo ("Action Frequency (seconds):<input name=\"FrequencySeconds\" value=\"$FrequencySeconds\">Note: 0=take action whenever sensor reports<br>");
-  echo ("<hr>\n");
-  //echo ("<br>TimeValue: $TimeValue<br>\n");
-  if ($ID == 0) {
-     echo ("<input type=\"button\" value=\"Add Action\" onclick=\"modAction(0);\">\n");      
-  } else {
-     echo ("<input type=\"button\" value=\"Save Action\" onclick=\"modAction($ID);\">\n");      
-  }
-?>
-<hr>
-<input type="button" value="TroubleShooting" onclick="troubleShoot();"><br>
-<input type="button" value="Test" onclick="testAction();"><br>
-<hr>
-<input type="button" value="Cancel" onclick="window.location.href='index.php';">
-</body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      or reports<br>");
   echo ("<hr>\n");
   //echo ("<br>TimeValue: $TimeValue<br>\n");
   if ($ID == 0) {

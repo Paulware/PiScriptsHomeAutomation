@@ -16,6 +16,9 @@
   function deleteSensor(MAC) {
      window.location.href = 'deleteSensor.php?MAC=' + MAC;
   }
+  function swapWeight (weight1,weight2) {
+     window.location.href ='moveupSensor.php?Weight1=' + weight1 + '&Weight2=' + weight2;
+  }
 </Script>
 </head>
 <body>
@@ -31,6 +34,7 @@
    $count = 0;
 
 
+   $first = true;
    while ($row = mysql_fetch_assoc ($result)) { 
       $MAC = $row['MAC'];
       
@@ -59,13 +63,15 @@
    } 
   
       
-   $result = query ( "Select * From sensors" );
+   $lastWeight=0;
+   $result = query ( "Select * From sensors ORDER BY Weight ASC" );
    $count = 0;
    while ($row = getResult ($result))   {		 
       if ($count == 0) {
          echo ("<table border=\"0px solid\" width=\"90%\">\n" );
-         echo ("<tr bgcolor=\"lightgray\"><th width=\"10%\" align=\"center\">Type</th><th width=\"15%\" align=\"center\">MAC</th><th width=\"15%\" align=\"middle\">IP Address</th><th width=\"10%\" align=\"center\">Value</th><th width=\"15%\" align=\"center\">Timestamp</th><th width=\"10%\" align=\"center\">Delete</th><th width=\"10%\">Location</th><th width=\"10%\">Action</th><th>History</th></tr>\n");
+         echo ("<tr bgcolor=\"lightgray\"><th width=\"10%\" align=\"center\">Type</th><th width=\"15%\" align=\"center\">MAC</th><th width=\"15%\" align=\"middle\">IP Address</th><th width=\"10%\" align=\"center\">Value</th><th width=\"15%\" align=\"center\">Timestamp</th><th width=\"10%\" align=\"center\">Delete</th><th width=\"10%\">Location</th><th width=\"10%\">Action</th><th>History</th><th>Move Up</th></tr>\n");
       }  
+      $Weight = $row["Weight"];
       $Id = $row["ID"];
       $TypeName = $row["TypeName"];
       $MAC = $row["MAC"];
@@ -92,8 +98,15 @@
       } else {
          print ("<td align=\"center\"><input type=\"button\" value=\"Delete\" onclick=\"deleteSensor('$MAC');\"></td><td><input name=\"location$count\" value=\"$Location\" onchange=\"modifyNickname('$MAC',this.value);\"></td>");       
       }   
-      print ("<td><input onclick=\"changeAction('$MAC');\" type=\"button\" value=\"Modify Action\"></td><td><input type=\"button\" value=\"Show History\" onclick=\"showHistory($Id);\"></td></tr>");       
+      print ("<td><input onclick=\"changeAction('$MAC');\" type=\"button\" value=\"Modify Action\"></td><td><input type=\"button\" value=\"Show History\" onclick=\"showHistory($Id);\"></td>");
+      if ($first) { // Can't move up first item
+         print ("<td>&nbsp;</td></tr>");      
+      } else { 
+         print ("<td><input type=\"button\" value=\"Move Up\" onclick=\"swapWeight($Weight,$lastWeight);\"></td></tr>");      
+      } 
+      $first = false;      
       $count = $count + 1;
+      $lastWeight = $Weight;      
    }  
 ?>
 

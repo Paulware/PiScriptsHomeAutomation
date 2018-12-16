@@ -22,7 +22,7 @@
   function addAction () {   
   
      url = 'modifyAction.php?ID=0&Sensor=' + Sensor;
-     alert ( 'go to : ' + url );
+     //alert ( 'go to : ' + url );
      window.location.href = url;             
   }
 </Script>

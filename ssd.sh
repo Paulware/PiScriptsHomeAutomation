@@ -1,4 +1,3 @@
-#!/bin/bash
 # return true if file found
 file_exists() {
    if [ -e $1 ]

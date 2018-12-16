@@ -4,7 +4,7 @@ import sys
 print str (sys.argv) 
 if sys.argv.__len__() > 1: 
    try: 
-      f = open ( 'GmailConfig.py', 'w')
+      f = open ( '/var/www/html/Paulware/GmailConfig.py', 'w')
       f.write  ( 'class GmailConfig():\n')
       f.write  ( '   def __init__ (self):\n')
       f.write  ( '       self.login = \'' + sys.argv[1] + '\'\n' )

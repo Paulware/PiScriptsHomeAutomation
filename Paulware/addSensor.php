@@ -36,6 +36,7 @@
 <option value="security">Security</option>
 <option value="lcddisplay">LCD Display</option>
 <option value="sonoff">Sonoff</option>
+<option value="iButtonReader">iButton Reader</option>
 <option value="picamera">Raspberry pi Camera</option>
 <option value="cameratank">Camera equipped tank</option>
 </Select>

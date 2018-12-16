@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # see https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 # for more information
 #

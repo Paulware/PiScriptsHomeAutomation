@@ -218,6 +218,20 @@
        return $row;
    } 
    
+   function addWeight ($mac) {
+     $sql = "Select * From sensors Where MAC='$mac'";
+     $result = query ($sql);
+     if ($row = mysql_fetch_assoc ($result)) {
+        $Id = $row ['ID'];
+        $sql = "Update sensors set Weight=$Id Where ID=$Id";
+        echo ("$sql <br>\n" );
+        $result = query ($sql);
+        echo ("Weight updated for MAC:$mac<br>\n");        
+     } else {
+        echo ("Could not find MAC='$mac'<br>\n" );
+     } 
+   } 
+   
    function displaySensor ($ServerAddress, $Action) {
      $sql = "Select * From sensors";
      $result = query ($sql);
@@ -447,7 +461,8 @@
      return mysql_fetch_assoc($result);              
    }
    
-   function getIsTriggered ($Event, $temperature, $TriggerValue, $humidity, $value, $currentValue, $TimeValue ) {
+   function getIsTriggered ($Event, $temperature, $TriggerValue, $humidity, $value, $currentValue, $TimeValue, $IButtonValue ) {
+     echo "getIsTriggered Passing in IButtonValue: [$IButtonValue]<br>";
      // Get $isTriggered
      $isTriggered = false;     
      if ($Event == 'motion') {
@@ -508,6 +523,13 @@
        } else { // Water was detected
           $isTriggered = true;
        }
+     } else if ($Event == 'iButton') {       
+       if ($value == $IButtonValue) {
+          echo "<br> ibutton value: [$value] == [$IButtonValue]   TRIGGERED=YES<br>";
+          $isTriggered = true;
+       } else {
+          echo "<br> ibutton value: [$value] <> [$IButtonValue]<br>";
+       }         
      } else if ($Event == 'time') {
        $t = date ('H:i', time());
        if ($t == $TimeValue) {

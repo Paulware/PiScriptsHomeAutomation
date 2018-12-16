@@ -23,7 +23,8 @@
      $sql = "Insert into sensors (MAC, Value,TypeName) values ( '$mac','0','$sensorType')";
      echo ("$sql<br>\n");
      query ($sql);
-     echo ( "That sensor does not yet exist, added it to the Sensors Table");  
+     echo ( "That sensor does not yet exist, added it to the Sensors Table"); 
+     addWeight ( $mac );     
   }
   echo ("<Script>\n");
   echo ("  window.location.href = 'index.php';\n");

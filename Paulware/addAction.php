@@ -19,11 +19,12 @@ $TimeValue        = getParam ("TimeValue");
 $HumidityValue    = getParam ("HumidityValue");
 $TriggerValue     = getParam ("TriggerValue");
 $FrequencySeconds = getParam ("FrequencySeconds");
+$IButtonValue     = getParam ("IButtonValue");
 
 if ($ID==0) {
-  $sql = "Insert into actions (Sensor,Action,Event,Message,Phone,Provider,Username,Subject,Body,AffectedMAC,TimeValue,HumidityValue,TriggerValue,FrequencySeconds) values ( $Sensor, '$Action','$Event','$Message','$Phone', '$Provider','$Username', '$Subject', '$Body','$AffectedMAC','$TimeValue','$HumidityValue','$TriggerValue',$FrequencySeconds)";
+  $sql = "Insert into actions (Sensor,Action,Event,Message,Phone,Provider,Username,Subject,Body,AffectedMAC,TimeValue,HumidityValue,TriggerValue,FrequencySeconds,IButtonValue) values ( $Sensor, '$Action','$Event','$Message','$Phone', '$Provider','$Username', '$Subject', '$Body','$AffectedMAC','$TimeValue','$HumidityValue','$TriggerValue',$FrequencySeconds,'$IButtonValue')";
 } else {
-  $sql = "Update actions Set FrequencySeconds=$FrequencySeconds, TriggerValue='$TriggerValue', HumidityValue='$HumidityValue', TimeValue='$TimeValue', AffectedMAC='$AffectedMAC', Action='$Action', Sensor=$Sensor, Event='$Event', Message='$Message', Phone='$Phone', Provider='$Provider', Username='$Username', Subject='$Subject', Body='$Body' Where ID=$ID";
+  $sql = "Update actions Set FrequencySeconds=$FrequencySeconds, TriggerValue='$TriggerValue', HumidityValue='$HumidityValue', TimeValue='$TimeValue', AffectedMAC='$AffectedMAC', Action='$Action', Sensor=$Sensor, Event='$Event', Message='$Message', Phone='$Phone', Provider='$Provider', Username='$Username', Subject='$Subject', Body='$Body', IButtonValue='$IButtonValue' Where ID=$ID";
 }  
 echo ("$sql<br>\n");
 $result = mysql_query($sql) or die("Could not execute: $sql");  
