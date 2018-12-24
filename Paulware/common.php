@@ -62,7 +62,7 @@
 
    function sendText ($phone, $provider, $body) {
      $email = textEmailAddress ($provider);    
-     $recipient = "$phone@$email";   
+     $recipient = "$phone@$email";
      $subject = '';
      $message = "$recipient`$subject`$body";
      //$t = date ('H:i', time()); 
@@ -231,6 +231,43 @@
         echo ("Could not find MAC='$mac'<br>\n" );
      } 
    } 
+   
+   function resetWeights() {
+     $sql = "Select * From sensors";
+     $result = query ($sql);
+     $count = 0;
+     while ($row = mysql_fetch_assoc ($result)) {
+       $MAC = $row ['MAC'];
+       $TypeName = $row["TypeName"]; 
+       if ($TypeName != 'timer') {
+          addWeight ($MAC);
+       }   
+     }     
+   } 
+      
+   function checkWeights() {
+     $sql = "Select * From sensors";
+     $result = query ($sql);
+     $count = 0;
+     $emptyWeight = false;
+     while ($row = mysql_fetch_assoc ($result)) {
+       $Weight = $row ['Weight'];
+       $ID = $row ['ID'];
+       $TypeName = $row["TypeName"]; 
+       $MAC = $row["MAC"];       
+       echo ( "[ID,TypeName,Weight]: [$ID,$TypeName,$Weight]<br>\n" );                 
+       if ($TypeName != 'timer') {
+          if ("$Weight" == "") { 
+             $emptyWeight = true;
+             break;
+          } 
+       } 
+     }     
+     if ($emptyWeight) { 
+        resetWeights();
+     } 
+   } 
+   
    
    function displaySensor ($ServerAddress, $Action) {
      $sql = "Select * From sensors";

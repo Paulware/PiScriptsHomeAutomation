@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-   echo ("Weight1: $Weight1, Weight2: $Weight2<br>");
+    echo ("Weight1: $Weight1, Weight2: $Weight2<br>");
     
     $sql = "Select * From sensors Where Weight = '$Weight1'";
     $result = query ( $sql );
