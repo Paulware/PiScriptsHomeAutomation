@@ -11,7 +11,7 @@ as a home automation server. <br><h2><i>Configuration instructions:</i></h2>
   <pre>
   sudo bash
   cd /boot
-  chmod 777 all.sh
+  chmod 777 *.sh
   ./all.sh gmailUsername gmailPassword
   </pre>
   
