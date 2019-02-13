@@ -3,7 +3,7 @@ These scripts are used to configure a Raspberry Pi
 as a home automation server. <br><h2><i>Configuration instructions:</i></h2>
 
   <ul>
-  <li>Obtain the latest raspbian image from <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a></li>
+  <li>Obtain the latest Raspbian Stretch image with desktop and recommended software from <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a></li>
   <li>Place the raspbian .img file on a 8gb (or larger) sd card (I use win32diskimager for this)</li>
   <li>Place all the files and directory from this repository on the sd card (this will be considered the /boot directory on the pi).  Any windows machine can be used for this as the sd card has a small amount of space which is windows compatible.</li>
   <li>Bootup the raspberry pi, open a line terminal and execute these commands:

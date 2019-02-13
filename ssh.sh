@@ -4,7 +4,7 @@ update_file() {
   mv /f $1
 }
 
-# permit ssh login  
+# permit ssh login
 touch /boot/ssh
 # permit root ssh login
 update_file /etc/ssh/sshd_config "#PermitRootLogin prohibit-password" "PermitRootLogin yes"
