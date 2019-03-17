@@ -9,7 +9,7 @@ as a home automation server. <br><h2><i>Configuration instructions:</i></h2>
   <li>Bootup the raspberry pi, open a line terminal and execute these commands:
   
   <pre>
-  sudo bash
+  sudo bash 
   cd /boot
   chmod 777 *.sh
   ./all.sh gmailUsername gmailPassword
